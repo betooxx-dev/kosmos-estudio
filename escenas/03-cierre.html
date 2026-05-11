@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html data-composition-id="escena-cierre">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: "Bebas Neue", "Impact", sans-serif;
+      background: var(--color-fondo, #0a0a0a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .centro {
+      text-align: center;
+    }
+
+    .evento {
+      font-size: 32px;
+      letter-spacing: 12px;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .apodo {
+      font-size: 240px;
+      line-height: 0.85;
+      color: var(--color-primario, #C41E3A);
+      text-transform: uppercase;
+      letter-spacing: -8px;
+    }
+
+    .linea-deco {
+      width: 200px;
+      height: 6px;
+      background: var(--color-secundario, #FFD700);
+      margin: 32px auto;
+    }
+
+    .tagline {
+      font-size: 36px;
+      letter-spacing: 8px;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <div class="centro">
+    <div class="evento" id="evento"></div>
+    <div class="apodo" id="apodo"></div>
+    <div class="linea-deco" id="linea-deco"></div>
+    <div class="tagline" id="tagline">Es Tiempo</div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    const vars = window.__hyperframes.getVariables();
+
+    document.documentElement.style.setProperty("--color-fondo", vars.color_fondo || "#0a0a0a");
+    document.documentElement.style.setProperty("--color-primario", vars.color_primario || "#C41E3A");
+    document.documentElement.style.setProperty("--color-secundario", vars.color_secundario || "#FFD700");
+
+    document.getElementById("evento").textContent = vars.titulo_evento || "";
+    document.getElementById("apodo").textContent = vars.persona_apodo || "";
+    if (vars.tagline_cierre) {
+      document.getElementById("tagline").textContent = vars.tagline_cierre;
+    }
+
+    const tl = gsap.timeline({ paused: true });
+
+    tl.from("#evento", { opacity: 0, y: -30, duration: 0.4, ease: "power2.out" })
+      .from("#apodo", { opacity: 0, scale: 0.8, duration: 0.7, ease: "back.out(1.4)" }, "-=0.1")
+      .from("#linea-deco", { scaleX: 0, duration: 0.4, ease: "power2.out" }, "-=0.2")
+      .from("#tagline", { opacity: 0, y: 20, duration: 0.4, ease: "power2.out" }, "-=0.1");
+
+    window.__timelines = window.__timelines || {};
+    window.__timelines["escena-cierre"] = tl;
+  </script>
+</body>
+</html>

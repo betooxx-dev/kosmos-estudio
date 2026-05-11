@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html data-composition-id="escena-stats">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: "Bebas Neue", "Impact", sans-serif;
+      background: var(--color-fondo, #0a0a0a);
+    }
+
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+
+    .barra-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: var(--color-primario, #C41E3A);
+    }
+
+    .titulo-seccion {
+      position: absolute;
+      top: 60px;
+      left: 120px;
+      font-size: 24px;
+      letter-spacing: 10px;
+      color: var(--color-secundario, #FFD700);
+      text-transform: uppercase;
+    }
+
+    .nombre-fighter {
+      position: absolute;
+      top: 100px;
+      left: 120px;
+      font-size: 80px;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: -2px;
+    }
+
+    .stats-grid {
+      position: absolute;
+      top: 280px;
+      left: 120px;
+      right: 120px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 60px;
+    }
+
+    .stat-card {
+      border-left: 4px solid var(--color-primario, #C41E3A);
+      padding-left: 32px;
+    }
+
+    .stat-valor {
+      font-size: 96px;
+      color: #ffffff;
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+
+    .stat-label {
+      font-size: 24px;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    .record-display {
+      position: absolute;
+      bottom: 80px;
+      left: 120px;
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+    }
+
+    .record-label {
+      font-size: 28px;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 4px;
+    }
+
+    .record-valor {
+      font-size: 120px;
+      color: var(--color-secundario, #FFD700);
+      letter-spacing: -4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="barra-top" id="barra-top"></div>
+
+  <div class="titulo-seccion" id="titulo-seccion">Estadísticas</div>
+  <div class="nombre-fighter" id="nombre-fighter"></div>
+
+  <div class="stats-grid" id="stats-grid">
+    <div class="stat-card" id="stat-1">
+      <div class="stat-valor" id="stat-1-val">—</div>
+      <div class="stat-label" id="stat-1-lbl">Peso</div>
+    </div>
+    <div class="stat-card" id="stat-2">
+      <div class="stat-valor" id="stat-2-val">—</div>
+      <div class="stat-label" id="stat-2-lbl">División</div>
+    </div>
+    <div class="stat-card" id="stat-3">
+      <div class="stat-valor" id="stat-3-val">—</div>
+      <div class="stat-label" id="stat-3-lbl">País</div>
+    </div>
+  </div>
+
+  <div class="record-display">
+    <div class="record-label">RÉCORD</div>
+    <div class="record-valor" id="record"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    const vars = window.__hyperframes.getVariables();
+
+    document.documentElement.style.setProperty("--color-fondo", vars.color_fondo || "#0a0a0a");
+    document.documentElement.style.setProperty("--color-primario", vars.color_primario || "#C41E3A");
+    document.documentElement.style.setProperty("--color-secundario", vars.color_secundario || "#FFD700");
+
+    document.getElementById("nombre-fighter").textContent = vars.persona_nombre || "";
+    document.getElementById("record").textContent = vars.persona_record || "0-0-0";
+    document.getElementById("stat-1-val").textContent = vars.persona_peso || "—";
+    document.getElementById("stat-2-val").textContent = vars.persona_division || "—";
+    document.getElementById("stat-3-val").textContent = vars.persona_nacionalidad || "—";
+
+    const tl = gsap.timeline({ paused: true });
+
+    tl.from("#barra-top", { scaleX: 0, transformOrigin: "left", duration: 0.5, ease: "power2.out" })
+      .from("#titulo-seccion", { opacity: 0, y: -20, duration: 0.3 }, "-=0.2")
+      .from("#nombre-fighter", { opacity: 0, x: -50, duration: 0.5, ease: "power3.out" }, "-=0.1")
+      .from(".stat-card", {
+        opacity: 0, y: 40, duration: 0.5, stagger: 0.15, ease: "power2.out"
+      }, "-=0.2")
+      .from(".record-display", { opacity: 0, y: 30, duration: 0.5, ease: "power2.out" }, "-=0.2");
+
+    window.__timelines = window.__timelines || {};
+    window.__timelines["escena-stats"] = tl;
+  </script>
+</body>
+</html>

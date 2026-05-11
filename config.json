@@ -1,0 +1,17 @@
+{
+  "titulo_evento": "Nombre del Evento",
+  "persona": "placeholder",
+  "musica": null,
+  "paleta": null,
+  "escenas": [
+    { "archivo": "escenas/01-intro.html", "duracion": 4 },
+    { "archivo": "escenas/02-stats.html", "duracion": 6 },
+    { "archivo": "escenas/03-cierre.html", "duracion": 3 }
+  ],
+  "exportar": {
+    "fps": 30,
+    "calidad": "standard",
+    "formato": "mp4"
+  },
+  "overrides": {}
+}

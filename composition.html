@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html
+  data-composition-id="kosmos-video"
+  data-composition-variables="
+    persona_nombre=Nombre Completo;
+    persona_apodo=Apodo;
+    persona_record=00-0-0;
+    persona_division=División;
+    persona_foto=../../recursos/personas/placeholder/fotos/main.png;
+    color_primario=#C41E3A;
+    color_secundario=#FFD700;
+    color_fondo=#0a0a0a;
+    titulo_evento=Nombre del Evento;
+    duracion_intro=4;
+    duracion_stats=6;
+    duracion_cierre=3
+  "
+>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { width: 1920px; height: 1080px; overflow: hidden; background: #0a0a0a; }
+  </style>
+</head>
+<body>
+
+  <!-- ESCENA 1: Intro -->
+  <div
+    data-composition-src="escenas/01-intro.html"
+    data-start="0"
+    data-duration="4"
+    data-track-index="0"
+  ></div>
+
+  <!-- ESCENA 2: Stats -->
+  <div
+    data-composition-src="escenas/02-stats.html"
+    data-start="4"
+    data-duration="6"
+    data-track-index="0"
+  ></div>
+
+  <!-- ESCENA 3: Cierre -->
+  <div
+    data-composition-src="escenas/03-cierre.html"
+    data-start="10"
+    data-duration="3"
+    data-track-index="0"
+  ></div>
+
+</body>
+</html>
