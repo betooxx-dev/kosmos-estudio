@@ -40,8 +40,15 @@ Scenes must not hard-code names or colors — always read from `window.KOSMOS`.
 ## Git Rules
 
 - `output/` is in `.gitignore`
-- No AI co-author in commits
-- Commit message format: `type: short description` (Conventional Commits)
+- Commit message format: `type: slug` — Conventional Commits
+  ```
+  feat: add 04-highlights scene template
+  fix: repair gsap timeline in 01-intro
+  chore: update hyperframes skill
+  docs: clarify render.js variable contract
+  ```
+- Valid types: `feat`, `fix`, `chore`, `docs`, `refactor`, `style`
+- **Never add `Co-Authored-By:` lines** from Claude, Copilot, or any AI tool
 
 ## Worktree Commands
 

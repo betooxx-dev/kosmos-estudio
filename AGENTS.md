@@ -76,8 +76,16 @@ The only time you commit directly to estudio/ is when **improving the template i
 
 - Commit only template improvements (new scenes, render.js fixes, config schema changes)
 - `output/` is gitignored
-- Commit messages follow Conventional Commits: `feat:`, `fix:`, `chore:`
-- No AI co-author lines
+- Commit message format: `type: slug` — Conventional Commits
+  ```
+  feat: add 04-highlights scene template
+  fix: repair gsap timeline registration in 01-intro
+  chore: update hyperframes to latest version
+  docs: clarify window.__hyperframes data contract
+  refactor: extract variable loader into shared module
+  ```
+- Valid types: `feat`, `fix`, `chore`, `docs`, `refactor`, `style`
+- **Never include `Co-Authored-By:` trailers** from Claude, Copilot, or any AI model — commits are authored solely by the human committer
 
 ## Build & Test Commands
 
